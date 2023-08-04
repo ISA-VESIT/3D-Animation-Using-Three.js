@@ -37,7 +37,14 @@ function init(){
     let skyBox = new THREE.Mesh(skyBoxGeo, materialArray);    //Mesh requires 
 
     scene.add(skyBox);
-    window.addEventListener('resize', ()=>{window.location.reload()});
+    // In the resize event handler, you are reloading the entire page when the window is resized. 
+    // This approach may cause unnecessary resource reloads and reinitialization. Instead, consider updating the camera and 
+    // renderer aspect ratio directly without reloading the whole page
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    }); 
 }
 function animate() {
         
